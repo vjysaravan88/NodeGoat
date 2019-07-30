@@ -29,3 +29,16 @@ steps:
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     replaceExistingArchive: true
+- task: Veracode@2
+  inputs:
+    ConnectionDetailsSelection: 'Credentials'
+    username: 'vnagaraj@securecodewarrior.com'
+    password: 'dev540dev522GWEB#'
+    veracodeAppProfile: 'Node Goat'
+    version: '$(build.buildNumber)'
+    filepath: '$(build.artifactstagingdirectory)/$(Build.BuildId).zip'
+    createSandBox: false
+    createProfile: false
+    scanStatusCheckInterval: '60'
+    importResults: true
+    failBuildOnPolicyFail: false
