@@ -23,20 +23,9 @@ steps:
     TargetFolder: '$(build.artifactstagingdirectory)'
     CleanTargetFolder: true
     OverWrite: true
-- task: Veracode@2
+- task: ArchiveFiles@2
   inputs:
-    ConnectionDetailsSelection: 'Credentials'
-    username: 'vnagaraj@securecodewarrior.com'
-    password: 'dev540dev522GWEB#'
-    veracodeAppProfile: 'Node Goat'
-    version: '$(build.buildNumber)'
-    filepath: '$(build.artifactstagingdirectory)'
-    createSandBox: false
-    createProfile: false
-    scanStatusCheckInterval: '60'
-    importResults: true
-    failBuildOnPolicyFail: false
-
-- script: |
-    npm install
-  displayName: 'npm install'
+    rootFolderOrFile: '$(Build.Artifactstagingdirectory)'
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
